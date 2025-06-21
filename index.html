@@ -3,22 +3,545 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-   
-    <meta name="theme-color" content="#ff7f50">
-    <meta name="description" content="Foxtailinc is a creative advertising agency specializing in brand design, digital marketing, and video production. We help businesses tell their stories through innovative marketing solutions.">
-    <meta name="keywords" content="advertising, creative agency, brand design, digital marketing, video production, marketing solutions, Foxtailinc">
-    <meta name="author" content="Foxtailinc Team">
     <title>Foxtailinc - Creative Advertising Agency</title>
-    </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(218, 165, 32, 0.3);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 2px solid #DAA520;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #DAA520, #FFD700, #B8860B);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(218, 165, 32, 0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #DAA520;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(218, 165, 32, 0.4);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+            min-height: calc(100vh - 160px);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Home Page */
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            color: #000;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(218, 165, 32, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(218, 165, 32, 0.6);
+            background: linear-gradient(45deg, #FFD700, #DAA520);
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .service-card {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(218, 165, 32, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid rgba(218, 165, 32, 0.3);
+            color: #fff;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(218, 165, 32, 0.4);
+            border-color: #DAA520;
+        }
+
+        .service-card h3 {
+            color: #DAA520;
+            margin: 1rem 0;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* About Page */
+        .about-content {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(218, 165, 32, 0.2);
+            border: 2px solid rgba(218, 165, 32, 0.3);
+            color: #fff;
+        }
+
+        .about-content h2 {
+            color: #DAA520;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .team {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(218, 165, 32, 0.3);
+            color: #fff;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(218, 165, 32, 0.3);
+            border-color: #DAA520;
+        }
+
+        .team-member h3 {
+            color: #DAA520;
+        }
+
+        .team-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #000;
+        }
+
+        /* Contact Page */
+        .contact-content {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(218, 165, 32, 0.2);
+            border: 2px solid rgba(218, 165, 32, 0.3);
+            color: #fff;
+        }
+
+        .contact-content h2 {
+            color: #DAA520;
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #DAA520;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid rgba(218, 165, 32, 0.3);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #DAA520;
+            box-shadow: 0 0 10px rgba(218, 165, 32, 0.4);
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #DAA520, #FFD700);
+            color: #000;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(218, 165, 32, 0.4);
+            background: linear-gradient(45deg, #FFD700, #DAA520);
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            border: 1px solid rgba(218, 165, 32, 0.3);
+            color: #fff;
+        }
+
+        .contact-item h3 {
+            color: #DAA520;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #DAA520;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: #DAA520;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 2px solid #DAA520;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #DAA520;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                position: relative;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(10px);
+                padding: 1rem;
+                border-radius: 0 0 20px 20px;
+                border: 2px solid rgba(218, 165, 32, 0.3);
+                border-top: none;
+                gap: 0.5rem;
+                z-index: 1000;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                padding: 1rem;
+                text-align: center;
+                border-radius: 10px;
+                margin: 0.25rem 0;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero {
+                padding: 2rem 0;
+                margin-top: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+                padding: 0 1rem;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 2rem 0;
+            }
+
+            .service-card {
+                padding: 1.5rem;
+                margin: 0 0.5rem;
+            }
+
+            .service-icon {
+                font-size: 2.5rem;
+            }
+
+            .about-content,
+            .contact-content {
+                padding: 1.5rem;
+                margin: 1rem 0;
+            }
+
+            .about-content h2,
+            .contact-content h2 {
+                font-size: 2rem;
+                text-align: center;
+            }
+
+            .team {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .team-member {
+                padding: 1.5rem;
+            }
+
+            .contact-form {
+                padding: 0;
+            }
+
+            .contact-info {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .contact-item {
+                padding: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            footer {
+                padding: 1.5rem 0;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+                padding: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            .service-card {
+                margin: 0;
+                padding: 1rem;
+            }
+
+            .about-content,
+            .contact-content {
+                padding: 1rem;
+            }
+
+            .about-content h2,
+            .contact-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .team-member {
+                padding: 1rem;
+            }
+
+            .team-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .contact-item {
+                padding: 0.8rem;
+            }
+
+            .form-group input,
+            .form-group textarea {
+                padding: 0.8rem;
+            }
+
+            .submit-btn {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+    </style>
+</head>
 <body>
     <header>
         <div class="container">
             <nav>
-                <div class="logo">
-                    <img src="/logo.jpg" alt="logo" style="height: 50px; vertical-align: middle;">
-                </div>
-                <ul class="nav-links">
+                <div class="logo">Foxtailinc</div>
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">☰</button>
+                <ul class="nav-links" id="navLinks">
                     <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
                     <li><a href="#" class="nav-link" data-page="about">About Us</a></li>
                     <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
@@ -32,8 +555,7 @@
         <div id="home" class="page active">
             <div class="container">
                 <section class="hero">
-                    <h1>Foxtail Inc</h1>
-                    <h2>Creative Advertising Solutions</h2>
+                    <h1>Creative Advertising Solutions</h1>
                     <p>We bring your brand to life with innovative marketing strategies and stunning creative designs</p>
                     <a href="#" class="cta-button" data-page="contact">Get Started Today</a>
                 </section>
@@ -63,13 +585,43 @@
             <div class="container">
                 <div class="about-content">
                     <h2>About Foxtailinc</h2>
-                    <p>Founded in 2025, Foxtailinc has quickly established itself as a leading creative advertising agency. We specialize in helping businesses of all sizes tell their stories through innovative marketing solutions and compelling creative content.</p>
+                    <p>Founded in 2020, Foxtailinc has quickly established itself as a leading creative advertising agency. We specialize in helping businesses of all sizes tell their stories through innovative marketing solutions and compelling creative content.</p>
                     
                     <p>Our team combines strategic thinking with creative excellence to deliver campaigns that not only look great but drive real results. We believe in the power of authentic storytelling and data-driven insights to create meaningful connections between brands and their audiences.</p>
 
                     <p>At Foxtailinc, we're not just another advertising agency – we're your creative partners, dedicated to helping your brand succeed in today's competitive marketplace.</p>
 
                     <div class="team">
+                        <div class="team-member">
+                            <div class="team-avatar">🦊</div>
+                            <h3>Denis Loka</h3>
+                            <p>Creative Director</p>
+                            <p>10+ years of experience in brand strategy and creative direction.</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-avatar">🎯</div>
+                            <h3>Martin Bati</h3>
+                            <p>Marketing Strategist</p>
+                            <p>Expert in digital marketing and campaign optimization.</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-avatar">🗾</div>
+                            <h3>MARTIN OLAYO</h3>
+                            <p>Strategic Anaylsis</p>
+                            <p>Award-winning designer specializing in brand identity and visual storytelling.</p>
+                            <p>Expert in digital marketing and campaign optimization.</p>
+                        </div>
+                        <div class="team-member">
+                            <div class="team-avatar">👩‍💼</div>
+                            <h3>Precious</h3>
+                            <p>Lead Project Manager</p>
+                            <p>Precious ensures every project runs smoothly from start to finish, With a keen eye for detail and a passion for teamwork</p>
+                            <ul style="text-align:left; margin: 1rem auto 0; max-width: 180px; color: #FFD700;">
+                            <li>Expert in Agile & Scrum</li>
+                            <li>5+ years in creative project management</li>
+                            </ul>
+                        </div>
+                    </div><div class="team">
                         <div class="team-member">
                             <div class="team-avatar">🦊</div>
                             <h3>Denis Loka</h3>
@@ -112,11 +664,8 @@
                     <p>Ready to take your brand to the next level? We'd love to hear from you. Let's discuss how we can help bring your vision to life.</p>
 
                     <div class="contact-form">
-                        
                         <form action="https://formspree.io/f/xkgbzvjr" method="POST" id="contactForm">
-                            <h2>Contact Us</h2>
-                            <p>Fill out the form below and we'll get back to you within 24 hours.</p>
-                                <div class="form-group">
+                            <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" id="name" name="name" required>
                             </div>
@@ -134,24 +683,23 @@
                             </div>
                             <button type="submit" class="submit-btn">Send Message</button>
                         </form>
-                        </div>
-                        
+                    </div>
 
                     <div class="contact-info">
                         <div class="contact-item">
                             <div class="contact-icon">📍</div>
                             <h3>Location</h3>
-                            <p>Lincoln Flats<br>Kampala District</p>
+                            <p>123 Creative Street<br>Design District, NY 10001</p>
                         </div>
                         <div class="contact-item">
                             <div class="contact-icon">📞</div>
                             <h3>Phone</h3>
-                            <p>+256 (76) 395-9044</p>
+                            <p>+1 (555) 123-4567</p>
                         </div>
                         <div class="contact-item">
                             <div class="contact-icon">✉️</div>
                             <h3>Email</h3>
-                            <p>communications@foxtailinc.com</p>
+                            <p>hello@foxtailinc.com</p>
                         </div>
                     </div>
                 </div>
@@ -170,6 +718,13 @@
         const navLinks = document.querySelectorAll('.nav-link');
         const pages = document.querySelectorAll('.page');
         const ctaButton = document.querySelector('.cta-button');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navLinksContainer = document.getElementById('navLinks');
+
+        // Mobile menu toggle
+        mobileMenuToggle.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('active');
+        });
 
         function showPage(pageId) {
             // Hide all pages
@@ -187,6 +742,9 @@
 
             // Add active class to corresponding nav link
             document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
+
+            // Close mobile menu after selection
+            navLinksContainer.classList.remove('active');
         }
 
         // Add click event listeners to navigation links
@@ -200,13 +758,13 @@
 
         // CTA button functionality
         ctaButton.addEventListener('click', (e) => {
-            //e.preventDefault();
+            e.preventDefault();
             showPage('contact');
         });
 
         // Contact form functionality
         document.getElementById('contactForm').addEventListener('submit', (e) => {
-            // Do NOT prevent default, so the form submits
+            // Do NOT prevent default, so the form submits to Formspree
             const formData = new FormData(e.target);
             const name = formData.get('name');
             if (name) {
